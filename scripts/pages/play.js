@@ -98,6 +98,7 @@ function bindTouchEvents(mesra1, mesra2) {
         touchmove: touchF,
         touchend:function(){
             $(".highlighted").removeClass('highlighted');
+            accumulator = "";
         }
     });
 }
