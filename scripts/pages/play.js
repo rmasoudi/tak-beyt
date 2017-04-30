@@ -64,12 +64,8 @@ function renderTable(rowCount, colCount, beyt, level) {
 }
 
 function bindEvents(mesra1, mesra2) {
-    if (myApp.support.touch) {
-        bindTouchEvents(mesra1, mesra2);
-    }
-    else {
-        bindMouseEvents(mesra1, mesra2);
-    }
+    bindTouchEvents(mesra1, mesra2);
+    bindMouseEvents(mesra1, mesra2);
 }
 function bindMouseEvents(mesra1, mesra2) {
     var accumulator = "";
@@ -117,10 +113,8 @@ function checkMatch(accumulator, mesra1, mesra2) {
     }
 }
 function bindTouchEvents() {
-	myApp.alert("a", "");
     var currentTarget = $(), activeTarget = $();
     var touchF = function (e) {
-		myApp.alert("b", "");
         var touch = e.originalEvent.touches[0];
         currentTarget = getCurrent(
             {
