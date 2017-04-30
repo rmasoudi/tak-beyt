@@ -82,6 +82,26 @@ function bindMouseEvents(mesra1, mesra2) {
         });
 }
 
+function bindTouchEvents(mesra1, mesra2) {
+    var accumulator = "";
+    var touchF = function (e) {
+        var touch = e.originalEvent.touches[0];
+        var item= $(document.elementFromPoint(touch.clientX,touch.clientY));
+        if(!item.hasClass('highlighted') && item.hasClass('playCellInner')){
+            item.addClass('highlighted')
+            accumulator += (" " + item.html());
+            checkMatch(accumulator, mesra1, mesra2);
+        }
+    };
+    $('#playContainer').bind({
+        touchstart: touchF,
+        touchmove: touchF,
+        touchend:function(){
+            $(".highlighted").removeClass('highlighted');
+        }
+    });
+}
+
 function checkMatch(accumulator, mesra1, mesra2) {
     if (accumulator.trim() === mesra1) {
         $(".highlighted").css("visibility", "hidden");
@@ -96,20 +116,4 @@ function checkMatch(accumulator, mesra1, mesra2) {
     if ($("#secondSentence").data().found && $("#firstSentence").data().found) {
         myApp.alert("شما برنده شدید", "");
     }
-}
-function bindTouchEvents(mesra1, mesra2) {
-    var touchF = function (e) {
-        var touch = e.originalEvent.touches[0];
-        var item= $(document.elementFromPoint(touch.clientX,touch.clientY));
-        if(!item.hasClass('highlighted') && item.hasClass('playCellInner')){
-            item.addClass('highlighted')
-        }
-    };
-    $('#playContainer').bind({
-        touchstart: touchF,
-        touchmove: touchF,
-        touchend:function(){
-            $(".highlighted").removeClass('highlighted');
-        }
-    });
 }
