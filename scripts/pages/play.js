@@ -113,20 +113,11 @@ function checkMatch(accumulator, mesra1, mesra2) {
     }
 }
 function bindTouchEvents(mesra1, mesra2) {
-
-    var currentTarget = $(), activeTarget = $();
     var touchF = function (e) {
         var touch = e.originalEvent.touches[0];
-        currentTarget = getCurrent(
-            {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            }
-        );
-        $(document.elementFromPoint(touch.clientX,touch.clientY)).toggleClass('highlighted');
-        if (currentTarget && currentTarget !== activeTarget) {
-            activeTarget = currentTarget;
-            activeTarget.toggleClass('highlighted');
+        var item= $(document.elementFromPoint(touch.clientX,touch.clientY));
+        if(!item.hasClass('highlighted') && item.hasClass('playCellInner')){
+            item.addClass('highlighted')
         }
     };
     $('#playContainer').bind({
