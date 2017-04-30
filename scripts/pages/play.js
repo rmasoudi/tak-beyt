@@ -123,8 +123,7 @@ function bindTouchEvents(mesra1, mesra2) {
                 clientY: touch.clientY
             }
         );
-        alert(JSON.stringify(e.originalEvent));
-        alert(document.elementFromPoint(touch.clientX,touch.clientY));
+        $(document.elementFromPoint(touch.clientX,touch.clientY)).toggleClass('highlighted');
         if (currentTarget && currentTarget !== activeTarget) {
             activeTarget = currentTarget;
             activeTarget.toggleClass('highlighted');
