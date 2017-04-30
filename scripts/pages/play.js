@@ -112,7 +112,7 @@ function checkMatch(accumulator, mesra1, mesra2) {
         myApp.alert("شما برنده شدید", "");
     }
 }
-function bindTouchEvents() {
+function bindTouchEvents(mesra1, mesra2) {
     var currentTarget = $(), activeTarget = $();
     var touchF = function (e) {
         var touch = e.originalEvent.touches[0];
