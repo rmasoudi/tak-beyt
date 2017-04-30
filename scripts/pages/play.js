@@ -1,4 +1,3 @@
-var matrix = null;
 myApp.onPageInit('play', function (page) {
     var rowCount = 3;
     var colCount = 3;
@@ -46,20 +45,6 @@ function renderTable(rowCount, colCount, beyt, level) {
             counter++;
         }
     }
-    matrix = $('.playCellInner').map(function () {
-        var e = $(this),
-            o = e.offset(),
-            w = e.width(),
-            h = e.height();
-
-        return {
-            top: o.top,
-            left: o.left,
-            right: o.left + w,
-            bottom: o.top + h,
-            e: e
-        };
-    }).get();
     bindEvents(mesra1, mesra2);
 }
 
@@ -122,20 +107,9 @@ function bindTouchEvents(mesra1, mesra2) {
     };
     $('#playContainer').bind({
         touchstart: touchF,
-        touchmove: touchF
+        touchmove: touchF,
+        touchend:function(){
+            $(".highlighted").removeClass('highlighted');
+        }
     });
-}
-
-function getCurrent(touch) {
-    var a = matrix.filter(function (obj) {
-        var b = (
-        touch.clientX > obj.left &&
-        touch.clientX < obj.right &&
-        touch.clientY < obj.bottom &&
-        touch.clientY > obj.top
-        );
-
-        return b;
-    });
-    return a.length > 0 ? a[0].e : null;
 }
