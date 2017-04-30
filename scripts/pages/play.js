@@ -117,8 +117,10 @@ function checkMatch(accumulator, mesra1, mesra2) {
     }
 }
 function bindTouchEvents() {
+	myApp.alert("a", "");
     var currentTarget = $(), activeTarget = $();
     var touchF = function (e) {
+		myApp.alert("b", "");
         var touch = e.originalEvent.touches[0];
         currentTarget = getCurrent(
             {
