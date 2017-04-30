@@ -113,6 +113,7 @@ function checkMatch(accumulator, mesra1, mesra2) {
     }
 }
 function bindTouchEvents(mesra1, mesra2) {
+    alert("ok");
     var currentTarget = $(), activeTarget = $();
     var touchF = function (e) {
         var touch = e.originalEvent.touches[0];
