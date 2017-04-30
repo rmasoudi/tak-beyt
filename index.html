@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>My App</title>
+    <link rel="stylesheet" href="styles/framework7.ios.min.css">
+    <link rel="stylesheet" href="styles/framework7.ios.colors.min.css">
+    <link rel="stylesheet" href="styles/framework7.ios.rtl.min.css">
+    <link rel="stylesheet" href="styles/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+<div class="statusbar-overlay"></div>
+<div class="panel-overlay"></div>
+<div id="sidePanel" class="panel panel-right panel-reveal">
+    <div class="content-block user-panel">
+        <div class="row">
+            <div class="col-100">
+                <img id="imgUser" src="images/user.png" onerror="this.src='images/user.png'" class="profile-image">
+            </div>
+        </div>
+        <div class="row">
+            <div id="lblName" class="col-100"></div>
+        </div>
+        <div class="row">
+            <div id="lblScore" class="col-50"></div>
+            <div id="lblRank" class="col-50"></div>
+        </div>
+    </div>
+    <div class="contacts-block">
+        <div class="list-block">
+            <ul>
+                <li>
+                    <a href="links.html" class="item-link list-button side-item">
+                        <i class="fa fa-group side-icon"></i>
+                        <span> دوستان من</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="friendship.html" class="item-link list-button side-item">
+                        <i class="fa fa-handshake-o side-icon"></i>
+                        <span>دوست یابی </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="leaders.html" class="item-link list-button side-item">
+                        <i class="fa fa-line-chart side-icon"></i>
+                        <span>برترین ها</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="item-link list-button side-item">
+                        <i class="fa fa-shopping-cart side-icon"></i>
+                        <span>فروشگاه </span>
+                    </a>
+                </li>
+                <li>
+                    <a id="btnLogout" href="#" class="item-link list-button side-item">
+                        <i class="fa fa-power-off side-icon"></i>
+                        <span>خروج از حساب کاربری </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+<div class="views">
+    <div class="view view-main">
+
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
+                </div>
+                <div class="right">
+                    <a href="#">
+                        <span id="lblCoin"></span>
+                        <i class="fa fa-trophy"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="pages navbar-through toolbar-fixed">
+            <div data-page="index" class="page">
+                <div class="page-content">
+                    <div class="list-block">
+                        <ul>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">نام کاربری</div>
+                                        <div class="item-input">
+                                            <input dir="ltr" id="txtLoginUserName" type="text" name="name">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">گذرواژه</div>
+                                        <div class="item-input">
+                                            <input dir="ltr" id="txtLoginPassword" type="password" name="name">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <br/>
+
+                        <div class="row">
+                            <div class="col-33">
+                                <a id="btnLogin" class="button button-big button-red">ورود</a>
+                            </div>
+                            <div class="col-33">
+                                <a href="register.html" class="button button-big button-green">ثبت نام</a>
+                            </div>
+                            <div class="col-33">
+                                <a href="#" class="button button-big button-green">خروج</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="scripts/libs/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="scripts/libs/framework7.min.js"></script>
+<script type="text/javascript" src="scripts/data.js"></script>
+<script type="text/javascript" src="scripts/storage-fields.js"></script>
+<script type="text/javascript" src="scripts/messages.js"></script>
+<script type="text/javascript" src="scripts/constants.js"></script>
+<script type="text/javascript" src="scripts/globals.js"></script>
+<script type="text/javascript" src="scripts/utils.js"></script>
+<script type="text/javascript" src="scripts/my-app.js"></script>
+<script type="text/javascript" src="scripts/pages/main.js"></script>
+<script type="text/javascript" src="scripts/pages/menu.js"></script>
+<script type="text/javascript" src="scripts/pages/register.js"></script>
+<script type="text/javascript" src="scripts/pages/profile.js"></script>
+<script type="text/javascript" src="scripts/pages/leaders.js"></script>
+<script type="text/javascript" src="scripts/pages/friendship.js"></script>
+<script type="text/javascript" src="scripts/pages/links.js"></script>
+<script type="text/javascript" src="scripts/pages/messaging.js"></script>
+<script type="text/javascript" src="scripts/pages/play.js"></script>
+</body>
+</html>
