@@ -1,6 +1,6 @@
 var baseUrl = "http://localhost:9998/";
 var myApp = new Framework7({
-    tapHold:true
+    tapHold:false
 });
 var $$ = Dom7;
 
