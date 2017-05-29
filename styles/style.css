@@ -54,7 +54,7 @@
 }
 
 .startCell {
-    animation: blinker .75s linear infinite;
+     background-color: #DFE4FB;
 }
 
 @keyframes blinker {
