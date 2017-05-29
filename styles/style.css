@@ -12,115 +12,15 @@
     font-family: yekan;
 }
 
-.side-item {
-    background-color: #393939;
-    border: none;
-    color: #ffffff !important;
-    text-align: right !important;
-    font-size: 12pt;
-}
-
-.side-icon {
-    margin: 5px;
-}
-
-.user-panel {
-    color: #ffffff !important;
-}
-
-.thumb-image {
-    width: 100%;
-}
-
-.inputFile {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-}
-
-.inputFile + label {
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: #929499;
-    display: inline-block;
-    cursor: pointer;
-    padding: 5px;
-    width: 100%;
-    margin-bottom: 5px;
-    text-align: center;
-}
-
-.inputFile:focus + label,
-.inputFile + label:hover {
-    background-color: #5ac8fa;
-}
-
-.inputFile:focus + label {
-    outline: 1px dotted #000;
-    outline: -webkit-focus-ring-color auto 5px;
-}
-
-.user-image {
-    width: 50px;
-    height: 50px;
-    margin-left: 5px;
-    float: left;
-    border-radius: 50%;
-}
-
-.profile-image {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.user-item {
-    background-color: #f7f7f8;
-    padding: 4px;
-    margin: 5px;
-}
-
-.user-details {
-    font-size: 10pt !important;
-    color: #0066d6 !important;
-}
-
-.users-container {
-    padding: 5px;
-}
-
-.link-button {
-    font-size: 9pt;
-    width: 100%;
-}
-
-.message-remove {
-    font-size: 8pt;
-    cursor: pointer;
-}
-
-.message-time_field {
-    font-size: 8pt;
-    color: #0066d6;
-    margin: 5px;
-}
-
 #playContainer {
     width: 100%;
     height: 80%;
+    background-size: 100%;
 }
 
 #playAnswerBox {
     width: 100%;
     height: 20%;
-}
-#playAnswerBoxInner{
-    background-color: #ffffff;
 }
 
 .noselect {
@@ -152,8 +52,55 @@
     vertical-align: middle;
     border-radius: 5px;
 }
-.sentence{
+
+.startCell {
+    animation: blinker .75s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0
+    }
+}
+
+.sentence {
     width: 100%;
     font-size: 12pt;
     text-align: center;
+}
+
+.swiper-container {
+    height: 100%;
+}
+
+.swiper-slide {
+    background: #fff;
+}
+
+.swiper-slide span {
+    text-align: center;
+    display: block;
+    margin: 20px;
+    font-size: 21px;
+}
+
+#lblLevel {
+    border-radius: 50%;
+    background-color: #cfd5da;
+    width: 42px;
+    height: 36px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding-top: 6px;
+}
+
+.shaerImage {
+    height: 40px;
+    width: 40px;
+    border: solid 1px transparent;
+    border-radius: 50%;
+}
+.shaerImage-selected{
+    border: solid 1px #0066d6;
 }
