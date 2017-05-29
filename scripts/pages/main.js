@@ -169,6 +169,7 @@ function bindMouseEvents(mesra1, mesra2) {
 function bindTouchEvents(mesra1, mesra2) {
     var accumulator = "";
     var touchF = function (e) {
+        e.preventDefault();
         var touch = e.originalEvent.touches[0];
         highlightHoveredObject(touch.clientX, touch.clientY);
         /*var item = $(document.elementFromPoint(touch.clientX, touch.clientY));
