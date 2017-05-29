@@ -170,12 +170,13 @@ function bindTouchEvents(mesra1, mesra2) {
     var accumulator = "";
     var touchF = function (e) {
         var touch = e.originalEvent.touches[0];
-        var item = $(document.elementFromPoint(touch.clientX, touch.clientY));
+        highlightHoveredObject(touch.clientX, touch.clientY);
+        /*var item = $(document.elementFromPoint(touch.clientX, touch.clientY));
         if (!item.hasClass('highlighted') && item.hasClass('playCellInner')) {
             item.addClass('highlighted')
             accumulator += (" " + item.html());
             checkMatch(accumulator, mesra1, mesra2);
-        }
+        }*/
     };
     $('#playContainer').bind({
         touchstart: touchF,
@@ -186,7 +187,18 @@ function bindTouchEvents(mesra1, mesra2) {
         }
     });
 }
+function highlightHoveredObject(x, y) {
+    $('.playCellInner').each(function() {
+      // check if is inside boundaries
+      if (!(
+          x <= $(this).offset().left || x >= $(this).offset().left + $(this).outerWidth() ||
+          y <= $(this).offset().top  || y >= $(this).offset().top + $(this).outerHeight()
+      )) {
 
+        $(this).addClass('highlighted');
+      }
+    });
+}
 function checkMatch(accumulator, mesra1, mesra2) {
     if (accumulator.trim() === mesra1) {
         $(".highlighted").css("visibility", "hidden");
