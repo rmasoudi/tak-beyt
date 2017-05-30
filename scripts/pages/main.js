@@ -171,7 +171,7 @@ function bindTouchEvents(mesra1, mesra2) {
     var touchF = function (e) {
         e.preventDefault();
         var touch = e.originalEvent.touches[0];
-        highlightHoveredObject(touch.clientX, touch.clientY);
+        highlightHoveredObject(touch.clientX, touch.clientY,mesra1, mesra2);
         /*var item = $(document.elementFromPoint(touch.clientX, touch.clientY));
         if (!item.hasClass('highlighted') && item.hasClass('playCellInner')) {
             item.addClass('highlighted')
@@ -188,7 +188,8 @@ function bindTouchEvents(mesra1, mesra2) {
         }
     });
 }
-function highlightHoveredObject(x, y) {
+function highlightHoveredObject(x, y,mesra1, mesra2) {
+    var accumulator = "";
     $('.playCellInner').each(function() {
       // check if is inside boundaries
       if (!(
@@ -196,7 +197,11 @@ function highlightHoveredObject(x, y) {
           y <= $(this).offset().top  || y >= $(this).offset().top + $(this).outerHeight()
       )) {
 
-        $(this).addClass('highlighted');
+         if (!$(this).hasClass('highlighted') && $(this).hasClass('playCellInner')) {
+            $(this).addClass('highlighted')
+            accumulator += (" " + $(this).html());
+            checkMatch(accumulator, mesra1, mesra2);
+        }
       }
     });
 }
