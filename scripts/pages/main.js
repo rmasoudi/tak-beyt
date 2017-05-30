@@ -185,6 +185,7 @@ function bindTouchEvents(mesra1, mesra2) {
         touchend: function () {
             $(".highlighted").removeClass('highlighted');
             $("#firstSentence").data("accumulator","");
+            $("#blackboard").html("");
         }
     });
 }
@@ -205,6 +206,7 @@ function highlightHoveredObject(x, y,mesra1, mesra2) {
              }
              var newValue=oldValue+ (" " + $(this).html());
              $("#firstSentence").data("accumulator",newValue);
+             $("#blackboard").html(newValue);
             checkMatch(newValue, mesra1, mesra2);
         }
       }
