@@ -200,6 +200,7 @@ function highlightHoveredObject(x, y,mesra1, mesra2) {
          if (!$(this).hasClass('highlighted') && $(this).hasClass('playCellInner')) {
             $(this).addClass('highlighted')
             accumulator += (" " + $(this).html());
+             $("#firstSentence").html(accumulator);
             checkMatch(accumulator, mesra1, mesra2);
         }
       }
