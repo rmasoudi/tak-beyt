@@ -199,7 +199,11 @@ function highlightHoveredObject(x, y,mesra1, mesra2) {
 
          if (!$(this).hasClass('highlighted') && $(this).hasClass('playCellInner')) {
             $(this).addClass('highlighted')
-             var newValue=$("#firstSentence").data("accumulator")+ (" " + $(this).html());
+             var oldValue=$("#firstSentence").data("accumulator");
+             if(oldValue===undefined){
+                 oldValue="";
+             }
+             var newValue=oldValue+ (" " + $(this).html());
              $("#firstSentence").data("accumulator",newValue);
              $("#firstSentence").html(newValue);
             checkMatch(newValue, mesra1, mesra2);
