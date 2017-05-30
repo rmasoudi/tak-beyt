@@ -167,7 +167,7 @@ function bindMouseEvents(mesra1, mesra2) {
 }
 
 function bindTouchEvents(mesra1, mesra2) {
-    var accumulator = "";
+    
     var touchF = function (e) {
         e.preventDefault();
         var touch = e.originalEvent.touches[0];
@@ -184,12 +184,12 @@ function bindTouchEvents(mesra1, mesra2) {
         touchmove: touchF,
         touchend: function () {
             $(".highlighted").removeClass('highlighted');
-            accumulator = "";
+            $("#firstSentence").data("accumulator","");
         }
     });
 }
 function highlightHoveredObject(x, y,mesra1, mesra2) {
-    var accumulator = "";
+    
     $('.playCellInner').each(function() {
       // check if is inside boundaries
       if (!(
@@ -199,9 +199,10 @@ function highlightHoveredObject(x, y,mesra1, mesra2) {
 
          if (!$(this).hasClass('highlighted') && $(this).hasClass('playCellInner')) {
             $(this).addClass('highlighted')
-            accumulator += (" " + $(this).html());
-             $("#firstSentence").html(accumulator);
-            checkMatch(accumulator, mesra1, mesra2);
+             var newValue=$("#firstSentence").data("accumulator")+ (" " + $(this).html());
+             $("#firstSentence").data("accumulator",newValue);
+             $("#firstSentence").html(newValue);
+            checkMatch(newValue, mesra1, mesra2);
         }
       }
     });
