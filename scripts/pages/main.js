@@ -205,7 +205,6 @@ function highlightHoveredObject(x, y,mesra1, mesra2) {
              }
              var newValue=oldValue+ (" " + $(this).html());
              $("#firstSentence").data("accumulator",newValue);
-             $("#firstSentence").html(newValue);
             checkMatch(newValue, mesra1, mesra2);
         }
       }
