@@ -129,7 +129,14 @@ function renderTable(rowCount, colCount, beyt, level) {
     }
     $("#firstSentence").data("answer", mesra1);
     $("#secondSentence").data("answer", mesra2);
+    
+    $("#firstSentence").data("found", false);
+     $("#secondSentence").data("found", false);
     bindEvents();
+    
+    
+
+    
 }
 
 function bindEvents() {
