@@ -206,13 +206,14 @@ function highlightHoveredObject(x, y,mesra1, mesra2) {
              }
              var newValue=oldValue+ (" " + $(this).html());
              $("#firstSentence").data("accumulator",newValue);
-             $("#firstSentence").html($(this).html());
+            
             checkMatch(newValue, mesra1, mesra2);
         }
       }
     });
 }
 function checkMatch(accumulator, mesra1, mesra2) {
+    $("#firstSentence").html(mesra1+"   "+accumulator);
     if (accumulator.trim() === mesra1) {
         $(".highlighted").css("visibility", "hidden");
         $("#firstSentence").html(mesra1);
