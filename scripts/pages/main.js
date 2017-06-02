@@ -223,7 +223,7 @@ function highlightHoveredObject(x, y) {
 function checkMatch(accumulator) {
     var mesra1= $("#firstSentence").data().answer;
     var mesra2= $("#secondSentence").data().answer;
-    $("#firstSentence").html(mesra1+"   "+accumulator);
+    
     if (accumulator.trim() === mesra1) {
         $(".highlighted").css("visibility", "hidden");
         $("#firstSentence").html(mesra1);
