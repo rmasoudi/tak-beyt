@@ -41,8 +41,7 @@ function loadLevel() {
     $("#firstSentence").html("");
     $("#secondSentence").html("");
     $("#playContainer").html("");
-    $("#firstSentence").data("found", false);
-    $("#secondSentence").data("found", false);
+    
     if (level >= GLOBALS.LEVEL_COUNT) {
         myApp.alert("شما به آخرین مرحله بازی رسیده اید", "");
         return;
@@ -128,15 +127,17 @@ function renderTable(rowCount, colCount, beyt, level) {
             counter++;
         }
     }
-    bindEvents(mesra1, mesra2);
+    $("#firstSentence").data("answer", mesra1);
+    $("#secondSentence").data("answer", mesra2);
+    bindEvents();
 }
 
-function bindEvents(mesra1, mesra2) {
-    bindTouchEvents(mesra1, mesra2);
-    bindMouseEvents(mesra1, mesra2);
+function bindEvents() {
+    bindTouchEvents();
+    bindMouseEvents();
 }
 
-function bindMouseEvents(mesra1, mesra2) {
+function bindMouseEvents() {
     var accumulator = "";
     var isMouseDown = false;
     $(".playCellInner")
@@ -145,7 +146,7 @@ function bindMouseEvents(mesra1, mesra2) {
             if (!$(this).hasClass("highlighted")) {
                 $(this).toggleClass("highlighted");
                 accumulator += (" " + $(this).html());
-                checkMatch(accumulator, mesra1, mesra2);
+                checkMatch(accumulator);
             }
             return false;
         })
@@ -154,7 +155,7 @@ function bindMouseEvents(mesra1, mesra2) {
                 if (!$(this).hasClass("highlighted")) {
                     $(this).toggleClass("highlighted");
                     accumulator += (" " + $(this).html());
-                    checkMatch(accumulator, mesra1, mesra2);
+                    checkMatch(accumulator);
                 }
             }
         });
@@ -166,12 +167,12 @@ function bindMouseEvents(mesra1, mesra2) {
         });
 }
 
-function bindTouchEvents(mesra1, mesra2) {
+function bindTouchEvents() {
     
     var touchF = function (e) {
         e.preventDefault();
         var touch = e.originalEvent.touches[0];
-        highlightHoveredObject(touch.clientX, touch.clientY,mesra1, mesra2);
+        highlightHoveredObject(touch.clientX, touch.clientY);
         /*var item = $(document.elementFromPoint(touch.clientX, touch.clientY));
         if (!item.hasClass('highlighted') && item.hasClass('playCellInner')) {
             item.addClass('highlighted')
@@ -189,7 +190,7 @@ function bindTouchEvents(mesra1, mesra2) {
         }
     });
 }
-function highlightHoveredObject(x, y,mesra1, mesra2) {
+function highlightHoveredObject(x, y) {
     
     $('.playCellInner').each(function() {
       // check if is inside boundaries
@@ -207,12 +208,14 @@ function highlightHoveredObject(x, y,mesra1, mesra2) {
              var newValue=oldValue+ (" " + $(this).html());
              $("#firstSentence").data("accumulator",newValue);
             
-            checkMatch(newValue, mesra1, mesra2);
+            checkMatch(newValue);
         }
       }
     });
 }
-function checkMatch(accumulator, mesra1, mesra2) {
+function checkMatch(accumulator) {
+    var mesra1= $("#firstSentence").data().answer;
+    var mesra2= $("#secondSentence").data().answer;
     $("#firstSentence").html(mesra1+"   "+accumulator);
     if (accumulator.trim() === mesra1) {
         $(".highlighted").css("visibility", "hidden");
