@@ -121,7 +121,7 @@ function renderTable(rowCount, colCount, beyt, level) {
             var cellInner = $("<div></div>").addClass("playCellInner");
             cell.append(cellInner);
             cellInner.html(parts[level[counter]]);
-            if (level[counter] === 0) {
+            if (level[counter] === 0  ||  level[counter]===mesra1.split(" ").length) {
                 cellInner.addClass("startCell");
             }
             counter++;
