@@ -20,22 +20,34 @@
     <div class="view view-main">
 
         <div class="navbar">
+            <div class="navbar-inner">
+                <a href="#" class="link">
+                    <img src="images/hafez.jpg" class="shaerImage shaerImage-selected" data-shaer="hafez">
+                </a>
+                <a href="#" class="link">
+                    <img src="images/sadi.jpg" class="shaerImage" data-shaer="sadi">
+                </a>
+                <a href="#" class="link">
+                    <img src="images/molavi.jpg" class="shaerImage" data-shaer="molavi">
+                </a>
+            </div>
         </div>
         <div class="pages navbar-through toolbar-fixed">
             <div data-page="play" class="page">
                 <div class="page-content">
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper">
-                            <div id="page5" class="swiper-slide"><span> ملک الشعرا</span></div>
-                            <div id="page4" class="swiper-slide"><span>شاعر</span></div>
-                            <div id="page3" class="swiper-slide"><span>نیمچه شاعر</span></div>
-                            <div id="page2" class="swiper-slide"><span> شعر آموز</span></div>
-                            <div id="page1" class="swiper-slide"><span> نوچه</span></div>
+                    <div id="playContainer" class="noselect">
+                    </div>
+                    <div id="playAnswerBox">
+                        <div id="playAnswerBoxInner">
+                            <div id="firstSentence" class="sentence"></div>
+                            <div id="secondSentence" class="sentence"></div>
                         </div>
-                        <div class="swiper-pagination"></div>
                     </div>
                 </div>
                 <div class="toolbar">
+                    <div class="toolbar-inner">
+                        <div id="lblLevel">1</div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -54,7 +54,13 @@
 }
 
 .startCell {
- background-color: #d8e6e8;
+    animation: blinker .75s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0
+    }
 }
 
 .sentence {
@@ -95,39 +101,6 @@
     border: solid 1px transparent;
     border-radius: 50%;
 }
-
-.shaerImage-selected {
+.shaerImage-selected{
     border: solid 1px #0066d6;
-}
-
-.levelTable {
-    width: 50%;
-    height: 80%;
-    direction: ltr;
-    text-align: center;
-    margin-left: 25%;
-    margin-right: 25%;
-}
-
-.levelItem {
-    padding-top: 15px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-image: url("../images/level.png");
-    background-size: 100%;
-    background-repeat: no-repeat;
-    color: #0066d6;
-    cursor: pointer;
-}
-.disabled{
-    padding-top: 15px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-image: url("../images/level-disabled.png");
-    background-size: 100%;
-    background-repeat: no-repeat;
-    color: #0066d6;
-    cursor: pointer;
 }
