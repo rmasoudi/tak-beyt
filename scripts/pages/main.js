@@ -1,27 +1,31 @@
-init();
-myApp.onPageInit('index', function (page) {
+myApp.onPageInit('play', function (page) {
     init();
 });
 function init() {
     loadLevel();
-    $(".shaerImage").click(function () {
-        $(".shaerImage").removeClass("shaerImage-selected");
-        $(this).addClass("shaerImage-selected");
-        loadLevel();
-    });
+    //$(".shaerImage").click(function () {
+    //    $(".shaerImage").removeClass("shaerImage-selected");
+    //    $(this).addClass("shaerImage-selected");
+    //    loadLevel();
+    //});
 }
 
 function getLevel() {
     var level = localStorage.getItem(StorageFields.LEVEL);
     if (level === null || level === undefined) {
-        level = 0;
-        localStorage.setItem(StorageFields.LEVEL, 0);
+        level = 1;
+        localStorage.setItem(StorageFields.LEVEL, 1);
+        return level;
     }
     return parseInt(level);
 }
 function goToNextLevel() {
     var shaer = $(".shaerImage-selected").data().shaer;
-    localStorage.setItem(StorageFields.LEVEL, getLevel() + 1);
+    var newLevel = getPlayingLevel() + 1;
+    if (newLevel > getLevel()) {
+        localStorage.setItem(StorageFields.LEVEL, newLevel);
+    }
+    setPlayingLevel(newLevel);
     if (shaer === "hafez") {
         shaer = "sadi";
     }
@@ -36,13 +40,12 @@ function goToNextLevel() {
 }
 
 function loadLevel() {
-    var level = getLevel();
-    $("#lblLevel").html(level + 1);
+    var level = getPlayingLevel();
+    $("#lblLevel").html(level);
     $("#firstSentence").html("");
     $("#secondSentence").html("");
     $("#playContainer").html("");
-    $("#firstSentence").data("found", false);
-    $("#secondSentence").data("found", false);
+
     if (level >= GLOBALS.LEVEL_COUNT) {
         myApp.alert("شما به آخرین مرحله بازی رسیده اید", "");
         return;
@@ -81,7 +84,7 @@ function loadLevel() {
         beyts = molavi_map[rowCount * colCount];
     }
     var currentLevels = levels[rowCount * colCount];
-    var randomBeyt = beyts[Math.floor(Math.random() * beyts.length)];
+    var randomBeyt = beyts[level - 1];
     var randomLevel = currentLevels[Math.floor(Math.random() * currentLevels.length)];
     renderTable(rowCount, colCount, randomBeyt, randomLevel);
 
@@ -122,21 +125,28 @@ function renderTable(rowCount, colCount, beyt, level) {
             var cellInner = $("<div></div>").addClass("playCellInner");
             cell.append(cellInner);
             cellInner.html(parts[level[counter]]);
-            if (level[counter] === 0) {
+            if (level[counter] === 0 || level[counter] === mesra1.split(" ").length) {
                 cellInner.addClass("startCell");
             }
             counter++;
         }
     }
-    bindEvents(mesra1, mesra2);
+    $("#firstSentence").data("answer", mesra1);
+    $("#secondSentence").data("answer", mesra2);
+
+    $("#firstSentence").data("found", false);
+    $("#secondSentence").data("found", false);
+    bindEvents();
+
+
 }
 
-function bindEvents(mesra1, mesra2) {
-    bindTouchEvents(mesra1, mesra2);
-    bindMouseEvents(mesra1, mesra2);
+function bindEvents() {
+    bindTouchEvents();
+    bindMouseEvents();
 }
 
-function bindMouseEvents(mesra1, mesra2) {
+function bindMouseEvents() {
     var accumulator = "";
     var isMouseDown = false;
     $(".playCellInner")
@@ -145,7 +155,7 @@ function bindMouseEvents(mesra1, mesra2) {
             if (!$(this).hasClass("highlighted")) {
                 $(this).toggleClass("highlighted");
                 accumulator += (" " + $(this).html());
-                checkMatch(accumulator, mesra1, mesra2);
+                checkMatch(accumulator);
             }
             return false;
         })
@@ -154,7 +164,7 @@ function bindMouseEvents(mesra1, mesra2) {
                 if (!$(this).hasClass("highlighted")) {
                     $(this).toggleClass("highlighted");
                     accumulator += (" " + $(this).html());
-                    checkMatch(accumulator, mesra1, mesra2);
+                    checkMatch(accumulator);
                 }
             }
         });
@@ -166,28 +176,56 @@ function bindMouseEvents(mesra1, mesra2) {
         });
 }
 
-function bindTouchEvents(mesra1, mesra2) {
-    var accumulator = "";
+function bindTouchEvents() {
+
     var touchF = function (e) {
+        e.preventDefault();
         var touch = e.originalEvent.touches[0];
-        var item = $(document.elementFromPoint(touch.clientX, touch.clientY));
-        if (!item.hasClass('highlighted') && item.hasClass('playCellInner')) {
-            item.addClass('highlighted')
-            accumulator += (" " + item.html());
-            checkMatch(accumulator, mesra1, mesra2);
-        }
+        highlightHoveredObject(touch.clientX, touch.clientY);
+        /*var item = $(document.elementFromPoint(touch.clientX, touch.clientY));
+         if (!item.hasClass('highlighted') && item.hasClass('playCellInner')) {
+         item.addClass('highlighted')
+         accumulator += (" " + item.html());
+         checkMatch(accumulator, mesra1, mesra2);
+         }*/
     };
     $('#playContainer').bind({
         touchstart: touchF,
         touchmove: touchF,
         touchend: function () {
             $(".highlighted").removeClass('highlighted');
-            accumulator = "";
+            $("#firstSentence").data("accumulator", "");
+            $("#blackboard").html("");
         }
     });
 }
+function highlightHoveredObject(x, y) {
 
-function checkMatch(accumulator, mesra1, mesra2) {
+    $('.playCellInner').each(function () {
+        // check if is inside boundaries
+        if (!(
+            x <= $(this).offset().left || x >= $(this).offset().left + $(this).outerWidth() ||
+            y <= $(this).offset().top || y >= $(this).offset().top + $(this).outerHeight()
+            )) {
+
+            if (!$(this).hasClass('highlighted') && $(this).hasClass('playCellInner')) {
+                $(this).addClass('highlighted')
+                var oldValue = $("#firstSentence").data("accumulator");
+                if (oldValue === undefined) {
+                    oldValue = "";
+                }
+                var newValue = oldValue + (" " + $(this).html());
+                $("#firstSentence").data("accumulator", newValue);
+
+                checkMatch(newValue);
+            }
+        }
+    });
+}
+function checkMatch(accumulator) {
+    var mesra1 = $("#firstSentence").data().answer;
+    var mesra2 = $("#secondSentence").data().answer;
+
     if (accumulator.trim() === mesra1) {
         $(".highlighted").css("visibility", "hidden");
         $("#firstSentence").html(mesra1);
@@ -203,4 +241,16 @@ function checkMatch(accumulator, mesra1, mesra2) {
         goToNextLevel();
         loadLevel();
     }
+}
+
+function gotoMain() {
+    window.location = "index.html";
+}
+
+function setPlayingLevel(val) {
+    localStorage.setItem(StorageFields.PLAYING_LEVEL, val);
+}
+
+function getPlayingLevel() {
+    return parseInt(localStorage.getItem(StorageFields.PLAYING_LEVEL));
 }
