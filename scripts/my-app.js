@@ -8,41 +8,33 @@ var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true
 });
 
-var mySwiper = myApp.swiper('.swiper-container', {
-    pagination: '.swiper-pagination',
-    initialSlide: 4
-});
-
-var counter = 1;
-for (var i = 1; i <= 5; i++) {
-    var page = $("#page" + i);
-    var table = $("<table class='levelTable'></table>");
-    for (var j = 0; j < 6; j++) {
-        var row = $("<tr></tr>");
-        for (var k = 0; k < 5; k++) {
-            var div = $("<div>" + counter + "</div>");
-            if (counter > getLevel()) {
-                div.addClass("disabled");
-            }
-            else {
-                div.addClass("levelItem");
-            }
-            div.click(function () {
-                if ($(this).hasClass("levelItem")) {
-                    localStorage.setItem(StorageFields.PLAYING_LEVEL, (parseInt($(this).html().trim())));
-                    mainView.loadPage("play.html");
+$(document).ready(function() {
+    var counter = 1;
+    for (var i = 1; i <= 5; i++) {
+        var page = $("#page" + i);
+        for (var j = 0; j < 6; j++) {
+            var row = $("<div class='row'></div>");
+            for (var k = 0; k < 5; k++) {
+                var div = $("<div class='col-20 levelItem'>" + counter + "</div>");
+                if (counter > getLevel()) {
+                    div.addClass("itemDisabled");
                 }
-            });
-            var col = $("<td></td>");
-            col.append(div);
-            counter++;
-            row.append(col);
+                else {
+                    div.addClass("itemEnabled");
+                }
+                div.click(function() {
+                    if ($(this).hasClass("itemEnabled")) {
+                        localStorage.setItem(StorageFields.PLAYING_LEVEL, (parseInt($(this).html().trim())));
+                        mainView.loadPage("play.html");
+                    }
+                });
+                counter++;
+                row.append(div);
+            }
+            page.append(row);
         }
-        table.append(row);
     }
-    page.append(table);
-
-}
+});
 
 function getLevel() {
     var level = localStorage.getItem(StorageFields.LEVEL);

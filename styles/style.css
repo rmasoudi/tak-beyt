@@ -54,7 +54,7 @@
 }
 
 .startCell {
- background-color: #d8e6e8;
+    background-color: #d8e6e8;
 }
 
 .sentence {
@@ -100,34 +100,28 @@
     border: solid 1px #0066d6;
 }
 
-.levelTable {
-    width: 50%;
-    height: 80%;
-    direction: ltr;
-    text-align: center;
-    margin-left: 25%;
-    margin-right: 25%;
+.itemEnabled {
+    background-color: #54cdea !important;
+}
+.itemDisabled{
+    background-color: #eeeeee !important;
+
 }
 
-.levelItem {
-    padding-top: 15px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-image: url("../images/level.png");
-    background-size: 100%;
-    background-repeat: no-repeat;
+.levelItem{
     color: #0066d6;
     cursor: pointer;
+    border-radius: 5px;
 }
-.disabled{
-    padding-top: 15px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-image: url("../images/level-disabled.png");
-    background-size: 100%;
-    background-repeat: no-repeat;
-    color: #0066d6;
-    cursor: pointer;
+
+div[class*="col-"] {
+    text-align: center;
+    color: #104c5a;
+    padding: 5px;
+}
+.row {
+    margin-bottom: 15px;
+}         
+.content-block-title{
+    padding-bottom:5px;
 }
