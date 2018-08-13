@@ -1,70 +1,79 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>My App</title>
-    <link rel="stylesheet" href="styles/framework7.ios.min.css">
-    <link rel="stylesheet" href="styles/framework7.ios.colors.min.css">
-    <link rel="stylesheet" href="styles/framework7.ios.rtl.min.css">
-    <link rel="stylesheet" href="styles/font-awesome.min.css">
-    <link rel="stylesheet" href="styles/style.css">
-</head>
-<body>
-<div class="statusbar-overlay"></div>
-<div class="panel-overlay"></div>
-<div class="views">
-    <div class="view view-main">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <title>My App</title>
+        <link rel="stylesheet" href="styles/framework7.ios.min.css">
+        <link rel="stylesheet" href="styles/framework7.ios.colors.min.css">
+        <link rel="stylesheet" href="styles/framework7.ios.rtl.min.css">
+        <link rel="stylesheet" href="styles/font-awesome.min.css">
+        <link rel="stylesheet" href="styles/style.css">
+    </head>
+    <body>
+        <div class="statusbar-overlay"></div>
+        <div class="panel-overlay"></div>
+        <div class="views">
+            <div class="view view-main">
 
-        <div class="navbar">
-            <div class="navbar-inner">
-                <a href="#" class="link">
-                    <img src="images/hafez.jpg" class="shaerImage shaerImage-selected" data-shaer="hafez">
-                </a>
-                <a href="#" class="link">
-                    <img src="images/sadi.jpg" class="shaerImage" data-shaer="sadi">
-                </a>
-                <a href="#" class="link">
-                    <img src="images/molavi.jpg" class="shaerImage" data-shaer="molavi">
-                </a>
-            </div>
-        </div>
-        <div class="pages navbar-through toolbar-fixed">
-            <div data-page="play" class="page">
-                <div class="page-content">
-                    <div id="playContainer" class="noselect">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <a href="#" class="link">
+                            <i class="fa fa-star"></i>
+                            <div id="lblLevel">1</div>
+                        </a>
+                        <div>
+                        </div>
+
+                        <a href="#" class="link">
+                            <img src="images/coin.png" alt="coin" height="36"/>
+                            <div id="lblCoin">3</div>
+                        </a>
                     </div>
-                    <div id="playAnswerBox">
-                        <div id="playAnswerBoxInner">
-                            <div id="firstSentence" class="sentence"></div>
-                            <div id="secondSentence" class="sentence"></div>
+                </div>
+                <div class="pages navbar-through toolbar-fixed">
+                    <div data-page="play" class="page">
+                        <div class="page-content">
+                            <div id="playContainer" class="noselect">
+                            </div>
+                            <div id="playAnswerBox">
+                                <div id="playAnswerBoxInner">
+                                    <div id="firstSentence" class="sentence"></div>
+                                    <div id="secondSentence" class="sentence"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="toolbar">
+                            <div class="toolbar-inner">
+
+                                <a id="btnSkipLevel" href="#" class="link">
+                                    رد کردن
+                                </a>
+                                <a href="#" class="link">
+                                    <img src="images/hafez.jpg" class="shaerImage shaerImage-selected" data-shaer="hafez">
+                                    <img src="images/sadi.jpg" class="shaerImage" data-shaer="sadi">
+                                    <img src="images/molavi.jpg" class="shaerImage" data-shaer="molavi">
+                                </a>
+                                <a href="#" class="link">
+                                    <i onclick="gotoMain();" class="fa fa-arrow-left"></i>
+                                </a>
+
+
+
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="toolbar">
-                    <div class="toolbar-inner">
-                        <a href="#" class="link">
-                        </a>
-
-                        <div id="lblLevel">1</div>
-                        <a href="#" class="link">
-                            <i onclick="gotoMain();" class="fa fa-arrow-left"></i>
-                        </a>
-
-                    </div>
-                </div>
             </div>
         </div>
-    </div>
-</div>
-<script type="text/javascript" src="scripts/libs/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="scripts/libs/framework7.min.js"></script>
-<script type="text/javascript" src="scripts/data.js"></script>
-<script type="text/javascript" src="scripts/storage-fields.js"></script>
-<script type="text/javascript" src="scripts/globals.js"></script>
-<script type="text/javascript" src="scripts/my-app.js"></script>
-<script type="text/javascript" src="scripts/pages/main.js"></script>
-</body>
+        <script type="text/javascript" src="scripts/libs/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="scripts/libs/framework7.min.js"></script>
+        <script type="text/javascript" src="scripts/data.js"></script>
+        <script type="text/javascript" src="scripts/storage-fields.js"></script>
+        <script type="text/javascript" src="scripts/globals.js"></script>
+        <script type="text/javascript" src="scripts/my-app.js"></script>
+        <script type="text/javascript" src="scripts/pages/main.js"></script>
+    </body>
 </html>

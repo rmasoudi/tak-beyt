@@ -1,4 +1,4 @@
-myApp.onPageInit('play', function (page) {
+myApp.onPageInit('play', function(page) {
     init();
 });
 function init() {
@@ -8,8 +8,34 @@ function init() {
     //    $(this).addClass("shaerImage-selected");
     //    loadLevel();
     //});
+    $("#btnSkipLevel").click(function() {
+        var coins=getCoins();
+        if ( coins>= 3) {
+            goToNextLevel();
+            loadLevel();
+            coins-=3;
+            setCoins(coins);
+        }
+        else {
+            myApp.alert("تعداد سکه شما کافی نیست", "");
+        }
+
+    });
+}
+function getCoins() {
+    var coins = localStorage.getItem(StorageFields.COINS);
+    if (coins === null || coins === undefined) {
+        coins = 3;
+        localStorage.setItem(StorageFields.COINS, 3);
+        return coins;
+    }
+    return parseInt(coins);
 }
 
+function setCoins(coins) {
+    $("#lblCoin").html(coins);
+    localStorage.setItem(StorageFields.COINS, coins);
+}
 function getLevel() {
     var level = localStorage.getItem(StorageFields.LEVEL);
     if (level === null || level === undefined) {
@@ -24,6 +50,7 @@ function goToNextLevel() {
     var newLevel = getPlayingLevel() + 1;
     if (newLevel > getLevel()) {
         localStorage.setItem(StorageFields.LEVEL, newLevel);
+        setCoins(getCoins()+1);
     }
     setPlayingLevel(newLevel);
     if (shaer === "hafez") {
@@ -45,6 +72,7 @@ function loadLevel() {
     $("#firstSentence").html("");
     $("#secondSentence").html("");
     $("#playContainer").html("");
+    $("#lblCoin").html(getCoins());
 
     if (level >= GLOBALS.LEVEL_COUNT) {
         myApp.alert("شما به آخرین مرحله بازی رسیده اید", "");
@@ -150,35 +178,35 @@ function bindMouseEvents() {
     var accumulator = "";
     var isMouseDown = false;
     $(".playCellInner")
-        .mousedown(function () {
-            isMouseDown = true;
-            if (!$(this).hasClass("highlighted")) {
-                $(this).toggleClass("highlighted");
-                accumulator += (" " + $(this).html());
-                checkMatch(accumulator);
-            }
-            return false;
-        })
-        .mouseover(function () {
-            if (isMouseDown) {
+            .mousedown(function() {
+                isMouseDown = true;
                 if (!$(this).hasClass("highlighted")) {
                     $(this).toggleClass("highlighted");
                     accumulator += (" " + $(this).html());
                     checkMatch(accumulator);
                 }
-            }
-        });
+                return false;
+            })
+            .mouseover(function() {
+                if (isMouseDown) {
+                    if (!$(this).hasClass("highlighted")) {
+                        $(this).toggleClass("highlighted");
+                        accumulator += (" " + $(this).html());
+                        checkMatch(accumulator);
+                    }
+                }
+            });
     $(document)
-        .mouseup(function () {
-            isMouseDown = false;
-            $(".highlighted").toggleClass("highlighted");
-            accumulator = "";
-        });
+            .mouseup(function() {
+                isMouseDown = false;
+                $(".highlighted").toggleClass("highlighted");
+                accumulator = "";
+            });
 }
 
 function bindTouchEvents() {
 
-    var touchF = function (e) {
+    var touchF = function(e) {
         e.preventDefault();
         var touch = e.originalEvent.touches[0];
         highlightHoveredObject(touch.clientX, touch.clientY);
@@ -192,7 +220,7 @@ function bindTouchEvents() {
     $('#playContainer').bind({
         touchstart: touchF,
         touchmove: touchF,
-        touchend: function () {
+        touchend: function() {
             $(".highlighted").removeClass('highlighted');
             $("#firstSentence").data("accumulator", "");
             $("#blackboard").html("");
@@ -201,12 +229,12 @@ function bindTouchEvents() {
 }
 function highlightHoveredObject(x, y) {
 
-    $('.playCellInner').each(function () {
+    $('.playCellInner').each(function() {
         // check if is inside boundaries
         if (!(
-            x <= $(this).offset().left || x >= $(this).offset().left + $(this).outerWidth() ||
-            y <= $(this).offset().top || y >= $(this).offset().top + $(this).outerHeight()
-            )) {
+                x <= $(this).offset().left || x >= $(this).offset().left + $(this).outerWidth() ||
+                y <= $(this).offset().top || y >= $(this).offset().top + $(this).outerHeight()
+                )) {
 
             if (!$(this).hasClass('highlighted') && $(this).hasClass('playCellInner')) {
                 $(this).addClass('highlighted')
@@ -237,7 +265,7 @@ function checkMatch(accumulator) {
         $("#secondSentence").data("found", true);
     }
     if ($("#secondSentence").data().found && $("#firstSentence").data().found) {
-        myApp.alert(mesra1 + "   " + mesra2, "");
+        myApp.alert(mesra1 + " <br>  " + mesra2, "");
         goToNextLevel();
         loadLevel();
     }
