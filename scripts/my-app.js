@@ -24,7 +24,8 @@ $(document).ready(function() {
                 }
                 div.click(function() {
                     if ($(this).hasClass("itemEnabled")) {
-                        localStorage.setItem(StorageFields.PLAYING_LEVEL, (parseInt($(this).html().trim())));
+                        var val = parseInt($(this).html().trim());
+                        localStorage.setItem(StorageFields.PLAYING_LEVEL, (val));
                         mainView.loadPage("play.html");
                     }
                 });

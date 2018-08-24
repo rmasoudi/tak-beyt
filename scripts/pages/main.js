@@ -3,17 +3,12 @@ myApp.onPageInit('play', function(page) {
 });
 function init() {
     loadLevel();
-    //$(".shaerImage").click(function () {
-    //    $(".shaerImage").removeClass("shaerImage-selected");
-    //    $(this).addClass("shaerImage-selected");
-    //    loadLevel();
-    //});
     $("#btnSkipLevel").click(function() {
-        var coins=getCoins();
-        if ( coins>= 3) {
+        var coins = getCoins();
+        if (coins >= 3) {
             goToNextLevel();
             loadLevel();
-            coins-=3;
+            coins -= 3;
             setCoins(coins);
         }
         else {
@@ -46,28 +41,17 @@ function getLevel() {
     return parseInt(level);
 }
 function goToNextLevel() {
-    var shaer = $(".shaerImage-selected").data().shaer;
     var newLevel = getPlayingLevel() + 1;
     if (newLevel > getLevel()) {
         localStorage.setItem(StorageFields.LEVEL, newLevel);
-        setCoins(getCoins()+1);
+        setCoins(getCoins() + 1);
     }
     setPlayingLevel(newLevel);
-    if (shaer === "hafez") {
-        shaer = "sadi";
-    }
-    else if (shaer === "sadi") {
-        shaer = "molavi";
-    }
-    else {
-        shaer = "hafez";
-    }
-    $(".shaerImage").removeClass("shaerImage-selected");
-    $("*[data-shaer='" + shaer + "']").addClass("shaerImage-selected");
 }
 
 function loadLevel() {
     var level = getPlayingLevel();
+    loadPoet(level);
     $("#lblLevel").html(level);
     $("#firstSentence").html("");
     $("#secondSentence").html("");
@@ -100,19 +84,8 @@ function loadLevel() {
         rowCount = 5;
         colCount = 4;
     }
-    var shaer = $(".shaerImage-selected").data().shaer;
-    var beyts;
-    if (shaer === "hafez") {
-        beyts = hafez_map[rowCount * colCount];
-    }
-    else if (shaer === "sadi") {
-        beyts = sadi_map[rowCount * colCount];
-    }
-    else {
-        beyts = molavi_map[rowCount * colCount];
-    }
     var currentLevels = levels[rowCount * colCount];
-    var randomBeyt = beyts[level - 1];
+    var randomBeyt = beyt_map[rowCount * colCount][level - 1];
     var randomLevel = currentLevels[Math.floor(Math.random() * currentLevels.length)];
     renderTable(rowCount, colCount, randomBeyt, randomLevel);
 
@@ -201,6 +174,7 @@ function bindMouseEvents() {
                 isMouseDown = false;
                 $(".highlighted").toggleClass("highlighted");
                 accumulator = "";
+                $("#lblTyping").html("");
             });
 }
 
@@ -210,17 +184,12 @@ function bindTouchEvents() {
         e.preventDefault();
         var touch = e.originalEvent.touches[0];
         highlightHoveredObject(touch.clientX, touch.clientY);
-        /*var item = $(document.elementFromPoint(touch.clientX, touch.clientY));
-         if (!item.hasClass('highlighted') && item.hasClass('playCellInner')) {
-         item.addClass('highlighted')
-         accumulator += (" " + item.html());
-         checkMatch(accumulator, mesra1, mesra2);
-         }*/
     };
     $('#playContainer').bind({
         touchstart: touchF,
         touchmove: touchF,
         touchend: function() {
+            $("#lblTyping").html("");
             $(".highlighted").removeClass('highlighted');
             $("#firstSentence").data("accumulator", "");
             $("#blackboard").html("");
@@ -251,6 +220,7 @@ function highlightHoveredObject(x, y) {
     });
 }
 function checkMatch(accumulator) {
+    $("#lblTyping").html(accumulator);
     var mesra1 = $("#firstSentence").data().answer;
     var mesra2 = $("#secondSentence").data().answer;
 
@@ -268,6 +238,7 @@ function checkMatch(accumulator) {
         myApp.alert(mesra1 + " <br>  " + mesra2, "");
         goToNextLevel();
         loadLevel();
+        $("#lblTyping").html("");
     }
 }
 
@@ -277,6 +248,19 @@ function gotoMain() {
 
 function setPlayingLevel(val) {
     localStorage.setItem(StorageFields.PLAYING_LEVEL, val);
+    loadPoet(val);
+}
+
+function loadPoet(val) {
+    if (val % 3 === 1) {
+        $(".shaerImage").attr("src", "images/hafez.jpg");
+    }
+    else if (val % 3 === 2) {
+        $(".shaerImage").attr("src", "images/sadi.jpg");
+    }
+    else if (val % 3 === 0) {
+        $(".shaerImage").attr("src", "images/molavi.jpg");
+    }
 }
 
 function getPlayingLevel() {
