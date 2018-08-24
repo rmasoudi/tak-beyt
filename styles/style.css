@@ -88,6 +88,11 @@
     padding-bottom: 6px;
     color: #00cc00;
 }
+
+#lblTyping{
+    font-size: x-small;
+    color: #009999;
+}
 #lblCoin{
     border-radius: 50%;
     width: 42px;
@@ -136,4 +141,8 @@ div[class*="col-"] {
 }         
 .content-block-title{
     padding-bottom:5px;
+}
+#lblShaer{
+    text-align: center;
+    color: #009999;
 }

@@ -153,7 +153,7 @@ function bindMouseEvents() {
     $(".playCellInner")
             .mousedown(function() {
                 isMouseDown = true;
-                if (!$(this).hasClass("highlighted")) {
+                if (!$(this).hasClass("highlighted") && $(this).css("visibility") !== "hidden") {
                     $(this).toggleClass("highlighted");
                     accumulator += (" " + $(this).html());
                     checkMatch(accumulator);
@@ -162,7 +162,7 @@ function bindMouseEvents() {
             })
             .mouseover(function() {
                 if (isMouseDown) {
-                    if (!$(this).hasClass("highlighted")) {
+                    if (!$(this).hasClass("highlighted") && $(this).css("visibility") !== "hidden") {
                         $(this).toggleClass("highlighted");
                         accumulator += (" " + $(this).html());
                         checkMatch(accumulator);
@@ -205,8 +205,8 @@ function highlightHoveredObject(x, y) {
                 y <= $(this).offset().top || y >= $(this).offset().top + $(this).outerHeight()
                 )) {
 
-            if (!$(this).hasClass('highlighted') && $(this).hasClass('playCellInner')) {
-                $(this).addClass('highlighted')
+            if (!$(this).hasClass('highlighted') && $(this).hasClass('playCellInner') && (this).css("visibility") !== "hidden") {
+                $(this).addClass('highlighted');
                 var oldValue = $("#firstSentence").data("accumulator");
                 if (oldValue === undefined) {
                     oldValue = "";
@@ -253,13 +253,13 @@ function setPlayingLevel(val) {
 
 function loadPoet(val) {
     if (val % 3 === 1) {
-        $(".shaerImage").attr("src", "images/hafez.jpg");
+        $("#lblShaer").html("حافظ");
     }
     else if (val % 3 === 2) {
-        $(".shaerImage").attr("src", "images/sadi.jpg");
+        $("#lblShaer").html("سعدی");
     }
     else if (val % 3 === 0) {
-        $(".shaerImage").attr("src", "images/molavi.jpg");
+        $("#lblShaer").html("مولوی");
     }
 }
 
